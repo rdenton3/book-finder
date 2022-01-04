@@ -18,15 +18,26 @@ var getBooks = function(category) {
     // make a request to the url
     fetch(apiUrl).then(function(response) {
         response.json().then(function(data) {
+            // call function to loop through data, create element, and display on screen
+            bookLoop(data)
             // when the data is called, pass it into displayBooks function to show on page
             console.log(data)
             displayBooks(data, category)
         })
     })
 }
-
+// loop over pulled data 
+var bookLoop = function(data) {
+    for (i=0; i<data.results.books.length; i++) {
+        var title = data.results.books[i].title
+        var author = data.results.books[i].author
+        var photo = data.results.books[i].book_image
+        console.log(title)
+    }
+}
 var displayBooks = function(data, category){
     console.log("display function worked")
+
 }
 
 getBooks();
