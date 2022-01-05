@@ -1,5 +1,10 @@
 var mainEl = document.querySelector(".search")
+var optionEl = document.getElementById('my-select')
 
+var test = function() {
+    category = optionEl.value.trim()
+    console.log(category)
+}
 var getBooks = function(category) {
     // dynamic api url
     var category = "hardcover-fiction"
@@ -21,7 +26,9 @@ var bookLoop = function(data) {
         // collect the variables we need
         var title = data.results.books[i].title
         var author = data.results.books[i].author
+        var description = data.results.books[i].description
         var photo = data.results.books[i].book_image
+        var link = data.results.books[i].amazon_product_url
         
         // then create element html element and add api data to it
         var titleEl = document.createElement("div")
@@ -30,10 +37,14 @@ var bookLoop = function(data) {
         authorEl.textContent = "Author: " + author
         var img = document.createElement("img")
         img.src = photo
+        var descriptionEl = document.createElement("div")
+        descriptionEl.textContent = "Description: " + description
+        var linkEl = document.createElement("a")
+        linkEl.textContent = "Amazon Link: " + link
         // div to hold all book elements
         var bookEl = document.createElement("div")
         // // append elements 
-        bookEl.append(img, titleEl, authorEl)
+        bookEl.append(img, titleEl, authorEl, descriptionEl, linkEl)
         mainEl.appendChild(bookEl)
     }
 }
@@ -42,4 +53,11 @@ var displayBooks = function(data, category){
 
 }
 
-getBooks();
+// getBooks();
+// optionEl.addEventListener("click", test)
+
+// optionEl.addEventListener('change', function() {
+//     console.log('You selected: ', this.value);
+//   });
+
+optionEl.addEventListener('change', test);
