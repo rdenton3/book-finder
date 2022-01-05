@@ -6,8 +6,11 @@ var test = function() {
     console.log(category)
 }
 var getBooks = function(category) {
+    // take the user selection and find the corresponding text item to run through api
+    var categoryMatch = optionEl.value.trim()
+    category = categoryLookup(categoryMatch)
+    console.log(category)
     // dynamic api url
-    var category = "hardcover-fiction"
     var apiUrl = "https://api.nytimes.com/svc/books/v3/lists/current/" + category + ".json?api-key=K1GxuJ1AkeAHy6BPRuFAGpG9GmITR0Eu"
     // make a request to the url
     fetch(apiUrl).then(function(response) {
@@ -19,6 +22,53 @@ var getBooks = function(category) {
             displayBooks(data, category)
         })
     })
+}
+// take the user selection and find the corresponding text item to run through api
+var categoryLookup = function(userSelect){
+    if (userSelect === "Fiction") {
+        category = "hardcover-fiction"
+        return category
+    }
+    else if (userSelect === "Non-Fiction") {
+        category = "hardcover-nonfiction"
+        return category
+    }
+    else if (userSelect === "Advice, How-To, and Misc.") {
+        category = "advice-how-to-and-miscellaneous"
+        return category
+    }
+    else if (userSelect === "Children's Books") {
+        category = "picture-books"
+        return category
+    }
+    else if (userSelect === "Young Adult") {
+        category = "young-adult"
+        return category
+    }
+    else if (userSelect === "Business") {
+        category = "business-books"
+        return category
+    }
+    else if (userSelect === "Food and Fitness") {
+        category = "food-and-fitness"
+        return category
+    }
+    else if (userSelect === "Religion, Spirituality, and Faith") {
+        category = "religion-spirituality-and-faith"
+        return category
+    }
+    else if (userSelect === "Science") {
+        category = "science"
+        return category
+    }
+    else if (userSelect === "Sports") {
+        category = "sports"
+        return category
+    }
+    else if (userSelect === "Travel") {
+        category = "travel"
+        return category
+    }
 }
 // loop over pulled data 
 var bookLoop = function(data) {
@@ -40,7 +90,7 @@ var bookLoop = function(data) {
         var descriptionEl = document.createElement("div")
         descriptionEl.textContent = "Description: " + description
         var linkEl = document.createElement("a")
-        linkEl.textContent = "Amazon Link: " + link
+        linkEl.textContent = link
         // div to hold all book elements
         var bookEl = document.createElement("div")
         // // append elements 
@@ -60,4 +110,4 @@ var displayBooks = function(data, category){
 //     console.log('You selected: ', this.value);
 //   });
 
-optionEl.addEventListener('change', test);
+optionEl.addEventListener('change', getBooks);
