@@ -1,4 +1,4 @@
-var mainEl = document.querySelector(".search")
+var resultsEl = document.querySelector(".show-results")
 var optionEl = document.getElementById('my-select')
 
 var test = function() {
@@ -19,7 +19,7 @@ var getBooks = function(category) {
             bookLoop(data)
             // when the data is called, pass it into displayBooks function to show on page
             console.log(data)
-            displayBooks(data, category)
+            // displayBooks(data, category)
         })
     })
 }
@@ -72,8 +72,11 @@ var categoryLookup = function(userSelect){
 }
 // loop over pulled data 
 var bookLoop = function(data) {
+    // clear any existing data
+    resultsEl.innerHTML = ""
     for (i=0; i<data.results.books.length; i++) {
         // collect the variables we need
+        var rank = data.results.books[i].rank
         var title = data.results.books[i].title
         var author = data.results.books[i].author
         var description = data.results.books[i].description
@@ -81,6 +84,8 @@ var bookLoop = function(data) {
         var link = data.results.books[i].amazon_product_url
         
         // then create element html element and add api data to it
+        var rankEl = document.createElement("div")
+        rankEl.textContent = "Rank: " + rank
         var titleEl = document.createElement("div")
         titleEl.textContent = "Book Title: " + title
         var authorEl = document.createElement("div")
@@ -93,15 +98,16 @@ var bookLoop = function(data) {
         linkEl.textContent = link
         // div to hold all book elements
         var bookEl = document.createElement("div")
+        bookEl.classList = "result-style"
         // // append elements 
-        bookEl.append(img, titleEl, authorEl, descriptionEl, linkEl)
-        mainEl.appendChild(bookEl)
+        bookEl.append(img, rankEl, titleEl, authorEl, descriptionEl, linkEl)
+        resultsEl.appendChild(bookEl)
     }
 }
-var displayBooks = function(data, category){
-    console.log("display function worked")
+// var displayBooks = function(data, category){
+//     console.log("display function worked")
 
-}
+// }
 
 // getBooks();
 // optionEl.addEventListener("click", test)

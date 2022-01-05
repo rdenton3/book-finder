@@ -1,0 +1,11 @@
+.show-results {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.result-style {
+    flex: 2 0 21%; /* explanation below */
+    margin: 5px;
+    /* height: 500px; */
+}
+
