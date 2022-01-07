@@ -1,4 +1,4 @@
-.show-results {
+.show-results, .show-favs {
     display: flex;
     flex-flow: row wrap;
 }
