@@ -4,8 +4,7 @@
 }
 
 .result-style {
-    flex: 2 0 21%; /* explanation below */
+    flex: 2 0 21%; 
     margin: 5px;
-    /* height: 500px; */
 }
 

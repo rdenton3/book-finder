@@ -1,5 +1,8 @@
 var resultsEl = document.querySelector(".show-results")
 var optionEl = document.getElementById('my-select')
+// var bookmarkEl = document.querySelector(".fas fa-bookmark")
+// var bookmarkEl = document.getElementById('bookmark')
+var bookmarkEl  = document.getElementsByTagName("i");
 
 var test = function() {
     category = optionEl.value.trim()
@@ -17,9 +20,7 @@ var getBooks = function(category) {
         response.json().then(function(data) {
             // call function to loop through data, create element, and display on screen
             bookLoop(data)
-            // when the data is called, pass it into displayBooks function to show on page
             console.log(data)
-            // displayBooks(data, category)
         })
     })
 }
@@ -75,7 +76,7 @@ var bookLoop = function(data) {
     // clear any existing data
     resultsEl.innerHTML = ""
     for (i=0; i<data.results.books.length; i++) {
-        // collect the variables we need
+        // collect the variables we need from api
         var rank = data.results.books[i].rank
         var title = data.results.books[i].title
         var author = data.results.books[i].author
@@ -84,36 +85,62 @@ var bookLoop = function(data) {
         var link = data.results.books[i].amazon_product_url
         
         // then create element html element and add api data to it
+        // also create unique data attribute to save into local storage
         var rankEl = document.createElement("div")
         rankEl.textContent = "Rank: " + rank
         var titleEl = document.createElement("div")
         titleEl.textContent = "Book Title: " + title
+        titleEl.classList = "title"
+        // titleEl.setAttribute()
         var authorEl = document.createElement("div")
         authorEl.textContent = "Author: " + author
+        authorEl.classList = "author"
         var img = document.createElement("img")
         img.src = photo
+        img.classList = "cover"
         var descriptionEl = document.createElement("div")
         descriptionEl.textContent = "Description: " + description
         var linkEl = document.createElement("a")
         linkEl.textContent = link
+        // create icon fo user to favorite the book
+        var iconEl = document.createElement("i")
+        iconEl.classList = "fas fa-bookmark"
+        var iconButton = document.createElement("button")
+        iconButton.appendChild(iconEl)
+        iconButton.classList = "btn"
+        var favoriteEl = document.createElement("div")
+        favoriteEl.textContent = "Favorite This Book "
+        favoriteEl.classList = "favorite"
+        favoriteEl.appendChild(iconButton)
+        // when bookmark icon is clicked, save this book title to the users favorites page
+        iconButton.onclick = function(){
+            // grab info on book title, cover, author
+            var author = $(this).parent().siblings(".author")
+            var authorText = author[0].innerText
+            var title = $(this).parent().siblings(".title")
+            var titleText = title[0].innerText
+            var cover = $(this).parent().siblings(".cover")
+            var coverImg = cover[0].currentSrc
+            // var test2 = test[0].innerText 
+            // var test2 = $(this).parent().attr("class")
+            // var test2 = $(test).siblings()
+            console.log(authorText)
+            console.log(titleText)
+            console.log(coverImg)
+            // console.log(test2)
+        }
         // div to hold all book elements
         var bookEl = document.createElement("div")
         bookEl.classList = "result-style"
         // // append elements 
-        bookEl.append(img, rankEl, titleEl, authorEl, descriptionEl, linkEl)
+        bookEl.append(img, rankEl, titleEl, authorEl, descriptionEl, linkEl, favoriteEl)
         resultsEl.appendChild(bookEl)
     }
 }
-// var displayBooks = function(data, category){
-//     console.log("display function worked")
-
-// }
-
-// getBooks();
-// optionEl.addEventListener("click", test)
-
-// optionEl.addEventListener('change', function() {
-//     console.log('You selected: ', this.value);
-//   });
+// when user clicks the bookmark icon, save the title and info into local storage
+var setLocal = function(event) {
+    console.log(bookEl)
+}
 
 optionEl.addEventListener('change', getBooks);
+
