@@ -1,7 +1,5 @@
 var resultsEl = document.querySelector(".show-results")
 var optionEl = document.getElementById('my-select')
-// var bookmarkEl = document.querySelector(".fas fa-bookmark")
-// var bookmarkEl = document.getElementById('bookmark')
 var bookmarkEl  = document.getElementsByTagName("i");
 
 var test = function() {
@@ -121,12 +119,7 @@ var bookLoop = function(data) {
             var titleText = title[0].innerText
             var cover = $(this).parent().siblings(".cover")
             var coverImg = cover[0].currentSrc
-            // var test2 = test[0].innerText 
-            // var test2 = $(this).parent().attr("class")
-            // var test2 = $(test).siblings()
-            console.log(authorText)
-            console.log(titleText)
-            console.log(coverImg)
+            // set elements into local storage
             setLocal(authorText, titleText, coverImg)
         }
         // div to hold all book elements
