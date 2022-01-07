@@ -112,7 +112,7 @@ var bookLoop = function(data) {
         favoriteEl.textContent = "Favorite This Book "
         favoriteEl.classList = "favorite"
         favoriteEl.appendChild(iconButton)
-        // when bookmark icon is clicked, save this book title to the users favorites page
+        // when bookmark icon is clicked, grab this book's title,author, cover so we can store in storage
         iconButton.onclick = function(){
             // grab info on book title, cover, author
             var author = $(this).parent().siblings(".author")
@@ -127,7 +127,7 @@ var bookLoop = function(data) {
             console.log(authorText)
             console.log(titleText)
             console.log(coverImg)
-            // console.log(test2)
+            setLocal(authorText, titleText, coverImg)
         }
         // div to hold all book elements
         var bookEl = document.createElement("div")
@@ -138,8 +138,14 @@ var bookLoop = function(data) {
     }
 }
 // when user clicks the bookmark icon, save the title and info into local storage
-var setLocal = function(event) {
-    console.log(bookEl)
+var setLocal = function(author,title,cover) {
+    //check if books array already exist, else create an array
+    var storedBooks = JSON.parse(localStorage.getItem("storedBooks")) || []
+    var newBook = {savedAuthor: author, savedTitle: title, savedCover: cover}
+    // push object into an array
+    storedBooks.push(newBook)
+    // save to local storage
+    localStorage.setItem("storedBooks", JSON.stringify(storedBooks))
 }
 
 optionEl.addEventListener('change', getBooks);
