@@ -73,7 +73,7 @@ var categoryLookup = function(userSelect){
 // loop over pulled data 
 var bookLoop = function(data) {
     // clear any existing data
-    // resultsEl.innerHTML = ""
+    resultsEl.innerHTML = ""
     for (i=0; i<data.results.books.length; i++) {
         // collect the variables we need from api
         var rank = data.results.books[i].rank
@@ -115,8 +115,6 @@ var bookLoop = function(data) {
         // creating new html tags and appending elements in order to show cards correctly
         var bookEl = document.createElement("div")
         bookEl.classList = "card"
-        var columnsEl = document.createElement("div")
-        columnsEl.classList = "columns is-2-tablet is-3-desktop"
         // creating card image
         var cardImg = document.createElement("div")
         cardImg.classList = "card-image"
@@ -144,14 +142,17 @@ var bookLoop = function(data) {
         aTag.classList = "card-footer-item"
         footer.appendChild(aTag)
 
+        var col = document.createElement("div")
+        col.classList = "column is-4"
+
         // create content box for description
         var content = document.createElement("div")
         content.classList = "content"
         content.appendChild(descriptionEl)
         // // append elements 
         bookEl.append(cardImg,cardContent,content,footer)
-        columnsEl.appendChild(bookEl)
-        resultsEl.appendChild(columnsEl)
+        col.appendChild(bookEl)
+        resultsEl.appendChild(col)
         console.log(resultsEl)
 
         // when bookmark icon is clicked, grab this book's title,author, cover so we can store in storage
@@ -159,12 +160,12 @@ var bookLoop = function(data) {
             
             var text = $(this).parent().siblings(".card-content")
             var link = $(this).parent().siblings(".card-image")
-            var contText = text.children()
-            var authTitle = contText[0].innerText
-            console.log(authTitle)
-            coverLink = link.children()
-            finalCover = coverLink[0].innerHTML
-            console.log(finalCover)
+            var bookTitle = text.children().children().children()
+            var title = bookTitle[0].innerText
+            var bookAuthor = text.children().children().children()
+            var author = bookAuthor[1].innerText
+            var coverLink = link.children().children()
+            var cover = coverLink[0].currentSrc
             // grab info on book title, cover, author
             // var author = $(this).parent().siblings(".author")
             // var authorText = author[0].innerText
@@ -173,16 +174,16 @@ var bookLoop = function(data) {
             // var cover = $(this).parent().siblings(".cover")
             // var coverImg = cover[0].currentSrc
             // // set elements into local storage
-            setLocal(authTitle, finalCover)
+            setLocal(title, author, cover)
         }
 
     }
 }
 // when user clicks the bookmark icon, save the title and info into local storage
-var setLocal = function(info ,cover) {
+var setLocal = function(title, author, cover) {
     //check if books array already exist, else create an array
     var storedBooks = JSON.parse(localStorage.getItem("storedBooks")) || []
-    var newBook = {authorTitle: info, savedCover: cover}
+    var newBook = {savedTitle: title, savedAuthor:author, savedCover: cover}
     // push object into an array
     storedBooks.push(newBook)
     // save to local storage
