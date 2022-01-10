@@ -37,7 +37,7 @@ var getLocal = function(){
         media.classList = "media"
         title.classList = "title is-4 zzz"
         author.classList = "subtitle is-6"
-        col.classList = "column is-4"
+        col.classList = "column is-3"
 
         // append elements to page
         fig.appendChild(img)

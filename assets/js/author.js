@@ -22,21 +22,98 @@ var authorPull = function(author) {
 // loop over pulled data 
 var authorLoop = function(data){
     for (i=0; i<30; i++){
-        var title = data.docs[i].title
-        var isbn = data.docs[i].isbn[0]
-        console.log(isbn)
-        coverLoop(isbn)
-    }
+        var titleEl = data.docs[i].title
+        var authorEl = data.docs[i].author_name
+        var isbn = data.docs[i].isbn[10]
+        // run isbn through second api to grab book cover
+        coverLoop(isbn, titleEl, authorEl)
+}
+}
+// var dispCover = function(url){
+//     // create elements to display data on page
+//     var card = document.createElement("div")
+//     var cardImg = document.createElement("div")
+//     var fig = document.createElement("figure")
+//     var img = document.createElement("img")
+//     var col = document.createElement("div")
+//     // set values
+//     img.src = url
+//     card.classList = "card"
+//     cardImg.classList = "card-image"
+//     fig.classList = "image is-2by3"
+//     col.classList = "column is-3"
+//     // append elements to page
+//     fig.appendChild(img)
+//     cardImg.appendChild(fig)
+//     card.appendChild(cardImg)
+//     col.appendChild(card)
+//     resultsEl.appendChild(col)
+// }
+
+var coverLoop = function(isbn, title, author){
+    apiUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
+    console.log(apiUrl)
+    fetch(apiUrl).then(function(response){
+        var url = response.url
+        // create elements to display data on page
+        var card = document.createElement("div")
+        var cardImg = document.createElement("div")
+        var fig = document.createElement("figure")
+        var img = document.createElement("img")
+        var col = document.createElement("div")
+        // set values
+        img.src = url
+        card.classList = "card"
+        cardImg.classList = "card-image"
+        fig.classList = "image is-2by3"
+        col.classList = "column is-3"
+        // append elements to page
+        fig.appendChild(img)
+        cardImg.appendChild(fig)
+        card.appendChild(cardImg)
+        col.appendChild(card)
+        resultsEl.appendChild(col)
+    })
+        // // create elements to display data on page
+        // var card = document.createElement("div")
+        // var cardImg = document.createElement("div")
+        // var fig = document.createElement("figure")
+        // var img = document.createElement("img")
+        // var cardCont = document.createElement("div")
+        // var media = document.createElement("div")
+        // var mediaCont = document.createElement("div")
+        // var titleEl = document.createElement("p")
+        // var authorEl = document.createElement("p")
+        // var col = document.createElement("div")
+    
+        // // set values
+        // // img.src = url
+        // authorEl.textContent = author
+        // titleEl.textContent = title
+        // // titleText.setAttribute("id", "styleTitle")
+        
+        // // create class names
+        // card.classList = "card"
+        // cardImg.classList = "card-image"
+        // fig.classList = "image is-2by3"
+        // cardCont.classList = "card-content"
+        // mediaCont.classList ="media-content"
+        // media.classList = "media"
+        // title.classList = "title is-4 zzz"
+        // author.classList = "subtitle is-6"
+        // col.classList = "column is-3"
+    
+        // // append elements to page
+        // fig.appendChild(img)
+        // cardImg.appendChild(fig)
+        // mediaCont.append(title,author)
+        // media.appendChild(mediaCont)
+        // cardCont.appendChild(media)
+        // card.append(cardImg,cardCont)
+        // col.appendChild(card)
+        // resultsEl.appendChild(col)
 }
 
-var coverLoop = function(isbn){
-    apiUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
-    fetch(apiUrl).then(function(response){
-        response.json().then(function(data){
-            console.log(data)
-        })
-    })
-}
-// take user's city input and feed through API
-searchEl.addEventListener("click", formSubmit )
+
+searchEl.addEventListener("click", formSubmit)
 
