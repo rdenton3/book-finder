@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>Search by Author</title>
 </head>
 <body>
+    <div class="field is-grouped">
+        <p class="control is-expanded">
+          <input class="input" id="user-input" type="text" placeholder="Find an Author">
+        </p>
+        <p class="control">
+          <a class="button" id="search-button">
+            Search
+          </a>
+        </p>
+    </div>
+    <div class="container">
+        <div id=show-results class="columns is-multiline"></div>
+    </div>
+      
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/author.js"></script>
 </body>
