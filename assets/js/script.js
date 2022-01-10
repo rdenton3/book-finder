@@ -79,10 +79,14 @@ var bookLoop = function(data) {
         var rank = data.results.books[i].rank
         var title = data.results.books[i].title
         var author = data.results.books[i].author
-        var description = data.results.books[i].description
+        
         var photo = data.results.books[i].book_image
         var link = data.results.books[i].amazon_product_url
-        
+        // if description is left blank, tell user no description
+        if (data.results.books[i].description === "") {
+            var description = "No description available"
+        }
+        else {var description = data.results.books[i].description}
         // then create element html element and add api data to it
         // also create unique data attribute to save into local storage
         var rankEl = document.createElement("p")
@@ -143,7 +147,7 @@ var bookLoop = function(data) {
         footer.appendChild(aTag)
 
         var col = document.createElement("div")
-        col.classList = "column is-4"
+        col.classList = "column is-3"
 
         // create content box for description
         var content = document.createElement("div")
