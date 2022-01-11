@@ -6,8 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>Search by Author</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
+    <header>
+        <nav class="navbar has-shadow is-white" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                <img src= "./assets/images/img1.png" width="170" height="30">
+              </a>
+          
+              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-end">
+                <a href="index.html" class="navbar-item mx-6">
+                  Home
+                </a>
+          
+                <a href="search.html" class="navbar-item mx-6">
+                  Bestsellers
+                </a>
+
+                <a href="favorites.html" class="navbar-item mx-6">
+                    Bookmarks
+                  </a>
+
+                <a href="author.html" class="navbar-item mx-6">
+                    Search Author
+                </a>
+              </div>
+            </div>
+          </nav>
+    </header>
     <div class="field is-grouped">
         <p class="control is-expanded">
           <input class="input" id="user-input" type="text" placeholder="Find an Author">

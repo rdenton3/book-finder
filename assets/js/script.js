@@ -142,9 +142,17 @@ var bookLoop = function(data) {
         var footer = document.createElement("footer")
         footer.classList = "card-footer"
         var aTag = document.createElement("a")
-        aTag.textContent = "Save to Favorites"
+        var aTag2 = document.createElement("a")
+        var iconEl = document.createElement("i")
+        iconEl.classList = "fas fa-bookmark ml-2"
+        aTag.textContent = "Bookmark "
+        aTag2.textContent = "Purchase"
+        aTag2.href= link
+        aTag2.target = "_blank"
+        aTag.appendChild(iconEl)
         aTag.classList = "card-footer-item"
-        footer.appendChild(aTag)
+        aTag2.classList = "card-footer-item"
+        footer.append(aTag,aTag2)
 
         var col = document.createElement("div")
         col.classList = "column is-3"
@@ -161,7 +169,6 @@ var bookLoop = function(data) {
 
         // when bookmark icon is clicked, grab this book's title,author, cover so we can store in storage
         aTag.onclick = function(){
-            
             var text = $(this).parent().siblings(".card-content")
             var link = $(this).parent().siblings(".card-image")
             var bookTitle = text.children().children().children()

@@ -12,11 +12,26 @@
     font-size: 16px;
 }
 
-.card {
+/* .card {
     height: 100%;
-  }
+  } */
 
   .content {
       margin: 0 5px 0 10px;
+  }
+
+  .card {
+    height: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-footer {
+    margin-top: auto;
+  }
+
+  .navbar-item {
+      margin-left: 30px;
   }
 

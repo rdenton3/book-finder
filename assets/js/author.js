@@ -1,6 +1,13 @@
 var searchEl = document.getElementById("search-button")
 var inputEl = document.getElementById("user-input")
 var resultsEl = document.getElementById("show-results")
+function getMeta(url){   
+    const img = new Image();
+    img.addEventListener("load", function() {
+        alert(this.naturalWidth +' '+ this.naturalHeight );
+    });
+    img.src = url;
+}
 
 // when search button is clicked, grab user input and feed through api
 var formSubmit = function() {
@@ -33,8 +40,10 @@ var authorLoop = function(data){
 
 var coverLoop = function(isbn, title, author){
     apiUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
+    getMeta(apiUrl)
     console.log(apiUrl)
     fetch(apiUrl).then(function(response){
+        console.log(response)
         var url = response.url
         // create elements to display data on page
         var card = document.createElement("div")
@@ -52,7 +61,8 @@ var coverLoop = function(isbn, title, author){
         img.src = url
         titleEl.textContent = title 
         authorEl.textContent = author
-
+        // console.log(img.Height, "yo")
+        // console.log(img.Width, "yo")
         // create class names
         card.classList = "card"
         cardImg.classList = "card-image"
@@ -73,9 +83,14 @@ var coverLoop = function(isbn, title, author){
         card.append(cardImg,cardCont)
         col.appendChild(card)
         resultsEl.appendChild(col)
+        var test5 = document.querySelector("img")
+        test5.onload=function(){
+            console.log(test5.height)
+        }
+        // console.log(document.querySelector("img").naturalHeight, " natural testing")
+        // console.log(document.querySelector("img").height, "no client")
     })
 }
-
 
 searchEl.addEventListener("click", formSubmit)
 
