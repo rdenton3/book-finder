@@ -1,3 +1,5 @@
+
+
 .show-results, .show-favs {
     display: flex;
     flex-flow: row wrap;
@@ -33,5 +35,13 @@
 
   .navbar-item {
       margin-left: 30px;
+  }
+
+  #sub {
+      font-style: italic;
+  }
+
+  #welcome {
+      letter-spacing: 5px;
   }
 

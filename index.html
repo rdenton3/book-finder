@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" >
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display&family=Staatliches&display=swap" rel="stylesheet">
+    <style>
+    body, header {
+    font-family: "Playfair Display", sans-serif;
+    }
+    </style>
     <title>About Page</title>
 </head>
 <body>
@@ -46,12 +54,34 @@
           </nav>
     </header>
     <main>
-        <div class="columns is-mobile is-centered">
+        <div class="columns is-mobile is-centered mb-3">
             <img class="column mt-6 ml-3" src="./assets/images/inspo.jpeg">
-            <div id="test" class="column mt-6 mr-3">
-                <h1 class="is-size-2 has-text-centered" id="welcome">Welcome</h1>
+            <div class="column mt-6 mr-3">
+                <h1 class="is-size-2 has-text-centered" id="welcome">WELCOME</h1>
+                <p class="is-size-3 has-text-centered" id="sub">Looking for a new book to read?</p>
+                <p class="is-size-4 mt-4">Let us help. </p>
+                <!-- <p class="is-size-4">We know sometimes it can be difficult to find inspiration for your next book.
+                    With so many book options available, we want to try to help you find a book that you will truly enjoy.
+                    Our site can help you in the following ways...
+                </p> -->
+                <ul>    
+                    <li>We know it can be difficult to find inspiration for your next book.
+                        With so many book options available, we want to help you find a book that you will truly enjoy.
+                        Our site can assist you in the following ways...</li>
+                    <li class="mt-4">Allow you to browse the New York Times bestsellers list by genre so you 
+                        can read today's most popular texts. Access this in the Bestsellers tab.</li>
+                    <li class="mt-4">Save titles that look interesting to you and reference them later in the Bookmarks tab.</li>
+                    <li class="mt-4">Search by your favorite author to find other books they have written in the Search Author tab.</li>
+                </ul>
             </div>
         </div>
     </main>
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>BookFinder</strong> by Rachel Denton, Helen Tariku, and Sallieu Kanu 
+          </p>
+        </div>
+      </footer>
 </body>
 </html>
