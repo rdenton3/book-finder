@@ -30,6 +30,7 @@ var getLocal = function(){
 
         // create class names
         card.classList = "card"
+        card.setAttribute("id","card-fav")
         cardImg.classList = "card-image"
         fig.classList = "image is-2by3"
         cardCont.classList = "card-content"

@@ -83,6 +83,7 @@ var coverLoop = function(isbn, title, author){
         // console.log(img.Width, "yo")
         // create class names
         card.classList = "card"
+        card.setAttribute("id","card2")
         cardImg.classList = "card-image"
         fig.classList = "image is-2by3"
         cardCont.classList = "card-content"
