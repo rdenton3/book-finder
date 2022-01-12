@@ -1,16 +1,29 @@
 var searchEl = document.getElementById("search-button")
 var inputEl = document.getElementById("user-input")
 var resultsEl = document.getElementById("show-results")
-function getMeta(url){   
-    const img = new Image();
-    img.addEventListener("load", function() {
-        alert(this.naturalWidth +' '+ this.naturalHeight );
-    });
-    img.src = url;
-}
+// function getMeta(url){   
+//     const img = new Image();
+//     img.addEventListener("load", function() {
+//         console.log(this.naturalWidth +' '+ this.naturalHeight );
+//     });
+//     img.src = url;
+// }
+// function getMeta(url){   
+//     const img = new Image();
+//     img.addEventListener("load", function() {
+//         pixels = this.naturalWidth +' '+ this.naturalHeight
+//         img.setAttribute("id", pixels)
+//     });
+//     getId = img.getAttribute("id")
+//     console.log(getId, "help")
+//     img.src = url;
+
+// }
 
 // when search button is clicked, grab user input and feed through api
 var formSubmit = function() {
+    // clear any existing data
+    resultsEl.innerHTML = ""
     var userSearch = inputEl.value.trim()
     console.log(userSearch)
     authorPull(userSearch)
@@ -40,7 +53,7 @@ var authorLoop = function(data){
 
 var coverLoop = function(isbn, title, author){
     apiUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
-    getMeta(apiUrl)
+    // getMeta(apiUrl)
     console.log(apiUrl)
     fetch(apiUrl).then(function(response){
         console.log(response)
@@ -57,10 +70,12 @@ var coverLoop = function(isbn, title, author){
         var authorEl = document.createElement("p")
         var col = document.createElement("div")
 
+
         // set values
         img.src = url
         titleEl.textContent = title 
         authorEl.textContent = author
+        titleEl.setAttribute("id", "styleTitle")
         // console.log(img.Height, "yo")
         // console.log(img.Width, "yo")
         // create class names
