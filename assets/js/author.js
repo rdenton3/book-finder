@@ -1,6 +1,7 @@
 var searchEl = document.getElementById("search-button")
 var inputEl = document.getElementById("user-input")
 var resultsEl = document.getElementById("show-results")
+var loadEl = document.getElementById("load")
 // function getMeta(url){   
 //     const img = new Image();
 //     img.addEventListener("load", function() {
@@ -31,6 +32,8 @@ var formSubmit = function() {
 
 var authorPull = function(author) {
     apiUrl = "http://openlibrary.org/search.json?author=" + author
+    var loader = '<progress class="progress is-medium is-dark" max="100">45%</progress>'
+    loadEl.innerHTML = loader
     fetch(apiUrl).then(function(response){
         response.json().then(function(data){
             console.log(data)
@@ -80,6 +83,7 @@ var coverLoop = function(isbn, title, author){
         // console.log(img.Width, "yo")
         // create class names
         card.classList = "card"
+        card.setAttribute("id","card2")
         cardImg.classList = "card-image"
         fig.classList = "image is-2by3"
         cardCont.classList = "card-content"
@@ -98,10 +102,8 @@ var coverLoop = function(isbn, title, author){
         card.append(cardImg,cardCont)
         col.appendChild(card)
         resultsEl.appendChild(col)
-        var test5 = document.querySelector("img")
-        test5.onload=function(){
-            console.log(test5.height)
-        }
+        // remove loading bar
+        loadEl.innerHTML = ""
         // console.log(document.querySelector("img").naturalHeight, " natural testing")
         // console.log(document.querySelector("img").height, "no client")
     })
