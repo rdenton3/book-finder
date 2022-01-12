@@ -35,15 +35,33 @@ var authorPull = function(author) {
     var loader = '<progress class="progress is-medium is-dark" max="100">45%</progress>'
     loadEl.innerHTML = loader
     fetch(apiUrl).then(function(response){
-        response.json().then(function(data){
-            console.log(data)
-            authorLoop(data)
-        })
-    })
+        if (response.ok) {
+            response.json().then(function(data){
+                console.log(data)
+                authorLoop(data)
+            })
+        }
+        // if invalid response is received, then alert user that search was unsuccessful
+        else {
+            resultsEl.innerHTML = "There was an error with your search. Please try again."
+            loadEl.innerHTML = ""
+        }
+    })  
+        .catch(function(error) {
+        resultsEl.innerHTML = "Unable to connect to server. Please try again"
+        loadEl.innerHTML = ""
+        });
 }
 
 // loop over pulled data 
 var authorLoop = function(data){
+    // error handling - if author does not exist, then display message to user
+    if(data.docs.length === 0) {
+        // remove loading bar
+        loadEl.innerHTML = ""
+        resultsEl.innerHTML = "No titles by this author. Please try another search."
+    }
+    else{
     for (i=0; i<30; i++){
         var titleEl = data.docs[i].title
         var authorEl = data.docs[i].author_name
@@ -51,6 +69,7 @@ var authorLoop = function(data){
         var isbn = data.docs[i].isbn[0]
         // run isbn through second api to grab book cover
         coverLoop(isbn, titleEl, authorEl)
+    }
 }
 }
 
