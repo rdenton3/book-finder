@@ -1,11 +1,51 @@
-.show-results {
+
+
+.show-results, .show-favs {
     display: flex;
     flex-flow: row wrap;
 }
 
 .result-style {
-    flex: 2 0 21%; /* explanation below */
+    flex: 2 0 21%; 
     margin: 5px;
-    /* height: 500px; */
 }
+
+.title, #styleTitle {
+    font-size: 16px;
+}
+
+/* .card {
+    height: 100%;
+  } */
+
+  .content {
+      margin: 0 5px 0 10px;
+  }
+
+  .card {
+    height: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-footer {
+    margin-top: auto;
+  }
+
+  .navbar-item {
+      margin-left: 30px;
+  }
+
+  #sub {
+      font-style: italic;
+  }
+
+  #welcome {
+      letter-spacing: 5px;
+  }
+
+  .hero {
+      background-color: rgb(234, 156, 41);
+  }
 

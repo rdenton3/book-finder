@@ -1,5 +1,7 @@
-var resultsEl = document.querySelector(".show-results")
+// var resultsEl = document.querySelector(".show-results")
+var resultsEl = document.getElementById('show-results')
 var optionEl = document.getElementById('my-select')
+var bookmarkEl  = document.getElementsByTagName("i");
 
 var test = function() {
     category = optionEl.value.trim()
@@ -17,9 +19,7 @@ var getBooks = function(category) {
         response.json().then(function(data) {
             // call function to loop through data, create element, and display on screen
             bookLoop(data)
-            // when the data is called, pass it into displayBooks function to show on page
             console.log(data)
-            // displayBooks(data, category)
         })
     })
 }
@@ -75,45 +75,131 @@ var bookLoop = function(data) {
     // clear any existing data
     resultsEl.innerHTML = ""
     for (i=0; i<data.results.books.length; i++) {
-        // collect the variables we need
+        // collect the variables we need from api
         var rank = data.results.books[i].rank
         var title = data.results.books[i].title
         var author = data.results.books[i].author
-        var description = data.results.books[i].description
+        
         var photo = data.results.books[i].book_image
         var link = data.results.books[i].amazon_product_url
-        
+        // if description is left blank, tell user no description
+        if (data.results.books[i].description === "") {
+            var description = "No description available"
+        }
+        else {var description = data.results.books[i].description}
         // then create element html element and add api data to it
-        var rankEl = document.createElement("div")
+        // also create unique data attribute to save into local storage
+        var rankEl = document.createElement("p")
         rankEl.textContent = "Rank: " + rank
-        var titleEl = document.createElement("div")
+        var titleEl = document.createElement("p")
         titleEl.textContent = "Book Title: " + title
-        var authorEl = document.createElement("div")
+        titleEl.classList = "title"
+        // titleEl.setAttribute()
+        var authorEl = document.createElement("p")
         authorEl.textContent = "Author: " + author
+        authorEl.classList = "subtitle is-6"
         var img = document.createElement("img")
         img.src = photo
-        var descriptionEl = document.createElement("div")
+        // img.classList = "cover"
+        var descriptionEl = document.createElement("p")
         descriptionEl.textContent = "Description: " + description
         var linkEl = document.createElement("a")
         linkEl.textContent = link
-        // div to hold all book elements
+        // // create icon fo user to favorite the book
+        // var iconEl = document.createElement("i")
+        // iconEl.classList = "fas fa-bookmark"
+        // var iconButton = document.createElement("button")
+        // iconButton.appendChild(iconEl)
+        // iconButton.classList = "btn"
+        // var favoriteEl = document.createElement("div")
+        // favoriteEl.textContent = "Favorite This Book "
+        // favoriteEl.classList = "favorite"
+        // favoriteEl.appendChild(iconButton)
+
+        // creating new html tags and appending elements in order to show cards correctly
         var bookEl = document.createElement("div")
-        bookEl.classList = "result-style"
+        bookEl.classList = "card"
+        // creating card image
+        var cardImg = document.createElement("div")
+        cardImg.classList = "card-image"
+        var cardFig = document.createElement("figure")
+        cardFig.classList = "image is-2by3"
+        cardFig.appendChild(img)
+        cardImg.appendChild(cardFig)
+        
+        // create rank, title + author 
+        var cardContent = document.createElement("div")
+        cardContent.classList = "card-content"
+        var media = document.createElement("div")
+        media.classList = "media"
+        var mediaContent = document.createElement("div")
+        mediaContent.classList = "media-content"
+        mediaContent.append(titleEl,authorEl)
+        media.append(mediaContent)
+        cardContent.appendChild(media)
+
+        // create footer 
+        var footer = document.createElement("footer")
+        footer.classList = "card-footer"
+        var aTag = document.createElement("a")
+        var aTag2 = document.createElement("a")
+        var iconEl = document.createElement("i")
+        iconEl.classList = "fas fa-bookmark ml-2"
+        aTag.textContent = "Bookmark "
+        aTag2.textContent = "Purchase"
+        aTag2.href= link
+        aTag2.target = "_blank"
+        aTag.appendChild(iconEl)
+        aTag.classList = "card-footer-item"
+        aTag2.classList = "card-footer-item"
+        footer.append(aTag,aTag2)
+
+        var col = document.createElement("div")
+        col.classList = "column is-3"
+
+        // create content box for description
+        var content = document.createElement("div")
+        content.classList = "content"
+        content.appendChild(descriptionEl)
         // // append elements 
-        bookEl.append(img, rankEl, titleEl, authorEl, descriptionEl, linkEl)
-        resultsEl.appendChild(bookEl)
+        bookEl.append(cardImg,cardContent,content,footer)
+        col.appendChild(bookEl)
+        resultsEl.appendChild(col)
+        console.log(resultsEl)
+
+        // when bookmark icon is clicked, grab this book's title,author, cover so we can store in storage
+        aTag.onclick = function(){
+            var text = $(this).parent().siblings(".card-content")
+            var link = $(this).parent().siblings(".card-image")
+            var bookTitle = text.children().children().children()
+            var title = bookTitle[0].innerText
+            var bookAuthor = text.children().children().children()
+            var author = bookAuthor[1].innerText
+            var coverLink = link.children().children()
+            var cover = coverLink[0].currentSrc
+            // grab info on book title, cover, author
+            // var author = $(this).parent().siblings(".author")
+            // var authorText = author[0].innerText
+            // var title = $(this).parent().siblings(".title")
+            // var titleText = title[0].innerText
+            // var cover = $(this).parent().siblings(".cover")
+            // var coverImg = cover[0].currentSrc
+            // // set elements into local storage
+            setLocal(title, author, cover)
+        }
+
     }
 }
-// var displayBooks = function(data, category){
-//     console.log("display function worked")
-
-// }
-
-// getBooks();
-// optionEl.addEventListener("click", test)
-
-// optionEl.addEventListener('change', function() {
-//     console.log('You selected: ', this.value);
-//   });
+// when user clicks the bookmark icon, save the title and info into local storage
+var setLocal = function(title, author, cover) {
+    //check if books array already exist, else create an array
+    var storedBooks = JSON.parse(localStorage.getItem("storedBooks")) || []
+    var newBook = {savedTitle: title, savedAuthor:author, savedCover: cover}
+    // push object into an array
+    storedBooks.push(newBook)
+    // save to local storage
+    localStorage.setItem("storedBooks", JSON.stringify(storedBooks))
+}
 
 optionEl.addEventListener('change', getBooks);
+

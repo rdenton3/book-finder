@@ -8,11 +8,66 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display&family=Staatliches&display=swap" rel="stylesheet">
+    <style>
+    body, header {
+    font-family: "Playfair Display", sans-serif;
+    }
+    </style>
+    <title>About Page</title>
     <title>Search Books</title>
 </head>
 <body>
-    <main class="search">
-        <div class="select">
+    <header>
+        <nav class="navbar has-shadow is-white" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                <img src= "./assets/images/img1.png" width="170" height="30">
+              </a>
+          
+              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-end">
+                <a href="index.html" class="navbar-item mx-6">
+                  Home
+                </a>
+          
+                <a href="search.html" class="navbar-item mx-6">
+                  Bestsellers
+                </a>
+
+                <a href="favorites.html" class="navbar-item mx-6">
+                    Bookmarks
+                  </a>
+
+                <a href="author.html" class="navbar-item mx-6">
+                    Search Author
+                </a>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-body">
+          <p class="title is-size-2">
+            Browse New York Times Bestsellers
+          </p>
+        </div>
+    </section>
+
+
+    <!-- <main class="columns mx-6">
+        <div class="is-two-thirds column ml-6 mt-6 is-size-5">
+            Choose a genre from the dropdown to see best-selling books in that category.
+            Save books for later using the bookmark tab at the bottom of each result.
+        </div>
+        <div class="select column mt-6">
             <select id="my-select">
                 <option class="option">Select Category</option>
                 <option class="option">Advice, How-To, and Misc.</option>
@@ -28,9 +83,34 @@
                 <option class="option">Young Adult</option>
             </select>
         </div>
-        <div class="show-results"></div>
+    </main> -->
+    <main>
+        <div class="mx-6 mt-6 is-size-5">
+            Choose a genre from the dropdown to see the New York Times best-selling books in that category.
+            Save books for later using the bookmark tab at the bottom of each result.
+        </div>
+        <div class="select mt-4 mb-6 mx-6">
+            <select id="my-select">
+                <option class="option">Select Category</option>
+                <option class="option">Advice, How-To, and Misc.</option>
+                <option class="option">Business</option>
+                <option class="option">Children's Books</option>
+                <option class="option">Fiction</option>
+                <option class="option">Food and Fitness</option>
+                <option class="option">Non-Fiction</option>
+                <option class="option">Religion, Spirituality, and Faith</option>
+                <option class="option">Science</option>
+                <option class="option">Sports</option>
+                <option class="option">Travel</option>
+                <option class="option">Young Adult</option>
+            </select>
+        </div>
     </main>
-    <!-- <script src = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"></script> -->
+
+    <div class="container">
+            <div id=show-results class="columns is-multiline"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
