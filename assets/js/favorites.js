@@ -72,6 +72,9 @@ var getLocal = function(){
                 if (savedBooks[i].savedTitle === title){
                     // remove the clicked book
                     savedBooks.splice(i, 1)
+                    // then also remove item from the page
+                    var resultHolder = $(this).parent().parent().parent()
+                    resultHolder.remove()
                 }
             }
             // reset local storage with updated object
