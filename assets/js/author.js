@@ -37,7 +37,6 @@ var authorPull = function(author) {
     fetch(apiUrl).then(function(response){
         if (response.ok) {
             response.json().then(function(data){
-                console.log(data)
                 authorLoop(data)
             })
         }
@@ -76,9 +75,7 @@ var authorLoop = function(data){
 var coverLoop = function(isbn, title, author){
     apiUrl = "https://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg"
     // getMeta(apiUrl)
-    console.log(apiUrl)
     fetch(apiUrl).then(function(response){
-        console.log(response)
         var url = response.url
         // create elements to display data on page
         var card = document.createElement("div")
@@ -98,8 +95,6 @@ var coverLoop = function(isbn, title, author){
         titleEl.textContent = title 
         authorEl.textContent = author
         titleEl.setAttribute("id", "styleTitle")
-        // console.log(img.Height, "yo")
-        // console.log(img.Width, "yo")
         // create class names
         card.classList = "card"
         card.setAttribute("id","card2")
@@ -123,8 +118,6 @@ var coverLoop = function(isbn, title, author){
         resultsEl.appendChild(col)
         // remove loading bar
         loadEl.innerHTML = ""
-        // console.log(document.querySelector("img").naturalHeight, " natural testing")
-        // console.log(document.querySelector("img").height, "no client")
     })
 }
 

@@ -28,7 +28,7 @@ THEN I can search by author name    and see all their published books
 * OpenLibrary API
 
 ## Website Link
-https://rdenton3.github.io/workdayScheduler/
+https://rdenton3.github.io/book-finder/ 
 
 ## Photos
 ![Home Page](./assets/images/img2.png)

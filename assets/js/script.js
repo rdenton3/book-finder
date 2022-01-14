@@ -3,15 +3,10 @@ var resultsEl = document.getElementById('show-results')
 var optionEl = document.getElementById('my-select')
 var bookmarkEl  = document.getElementsByTagName("i");
 
-var test = function() {
-    category = optionEl.value.trim()
-    console.log(category)
-}
 var getBooks = function(category) {
     // take the user selection and find the corresponding text item to run through api
     var categoryMatch = optionEl.value.trim()
     category = categoryLookup(categoryMatch)
-    console.log(category)
     // dynamic api url
     var apiUrl = "https://api.nytimes.com/svc/books/v3/lists/current/" + category + ".json?api-key=K1GxuJ1AkeAHy6BPRuFAGpG9GmITR0Eu"
     // make a request to the url
@@ -19,7 +14,6 @@ var getBooks = function(category) {
         response.json().then(function(data) {
             // call function to loop through data, create element, and display on screen
             bookLoop(data)
-            console.log(data)
         })
     })
 }
@@ -165,7 +159,6 @@ var bookLoop = function(data) {
         bookEl.append(cardImg,cardContent,content,footer)
         col.appendChild(bookEl)
         resultsEl.appendChild(col)
-        console.log(resultsEl)
 
         // when bookmark icon is clicked, grab this book's title,author, cover so we can store in storage
         aTag.onclick = function(){
