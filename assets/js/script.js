@@ -170,14 +170,6 @@ var bookLoop = function(data) {
             var author = bookAuthor[1].innerText
             var coverLink = link.children().children()
             var cover = coverLink[0].currentSrc
-            // grab info on book title, cover, author
-            // var author = $(this).parent().siblings(".author")
-            // var authorText = author[0].innerText
-            // var title = $(this).parent().siblings(".title")
-            // var titleText = title[0].innerText
-            // var cover = $(this).parent().siblings(".cover")
-            // var coverImg = cover[0].currentSrc
-            // // set elements into local storage
             setLocal(title, author, cover)
         }
 
