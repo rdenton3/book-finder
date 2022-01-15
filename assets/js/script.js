@@ -99,16 +99,6 @@ var bookLoop = function(data) {
         descriptionEl.textContent = "Description: " + description
         var linkEl = document.createElement("a")
         linkEl.textContent = link
-        // // create icon fo user to favorite the book
-        // var iconEl = document.createElement("i")
-        // iconEl.classList = "fas fa-bookmark"
-        // var iconButton = document.createElement("button")
-        // iconButton.appendChild(iconEl)
-        // iconButton.classList = "btn"
-        // var favoriteEl = document.createElement("div")
-        // favoriteEl.textContent = "Favorite This Book "
-        // favoriteEl.classList = "favorite"
-        // favoriteEl.appendChild(iconButton)
 
         // creating new html tags and appending elements in order to show cards correctly
         var bookEl = document.createElement("div")
@@ -139,12 +129,13 @@ var bookLoop = function(data) {
         var aTag2 = document.createElement("a")
         var iconEl = document.createElement("i")
         iconEl.classList = "fas fa-bookmark ml-2"
-        aTag.textContent = "Bookmark "
+        aTag.textContent = "Bookmark"
         aTag2.textContent = "Purchase"
         aTag2.href= link
         aTag2.target = "_blank"
         aTag.appendChild(iconEl)
         aTag.classList = "card-footer-item"
+        aTag.setAttribute("id", "bookmark-add")
         aTag2.classList = "card-footer-item"
         footer.append(aTag,aTag2)
 
@@ -162,6 +153,9 @@ var bookLoop = function(data) {
 
         // when bookmark icon is clicked, grab this book's title,author, cover so we can store in storage
         aTag.onclick = function(){
+            // change text content to tell the user they have successfully added the book to bookmark tab
+            this.innerHTML = "Added"
+            // grabbing the rest of the variables to save down into local storage
             var text = $(this).parent().siblings(".card-content")
             var link = $(this).parent().siblings(".card-image")
             var bookTitle = text.children().children().children()
@@ -170,16 +164,16 @@ var bookLoop = function(data) {
             var author = bookAuthor[1].innerText
             var coverLink = link.children().children()
             var cover = coverLink[0].currentSrc
-            setLocal(title, author, cover)
+            setLocal(title, author, cover, link)
         }
 
     }
 }
 // when user clicks the bookmark icon, save the title and info into local storage
-var setLocal = function(title, author, cover) {
+var setLocal = function(title, author, cover,link) {
     //check if books array already exist, else create an array
     var storedBooks = JSON.parse(localStorage.getItem("storedBooks")) || []
-    var newBook = {savedTitle: title, savedAuthor:author, savedCover: cover}
+    var newBook = {savedTitle: title, savedAuthor:author, savedCover: cover, savedLink:link}
     // push object into an array
     storedBooks.push(newBook)
     // save to local storage

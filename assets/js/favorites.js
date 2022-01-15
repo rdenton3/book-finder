@@ -1,6 +1,12 @@
 displayEl = document.querySelector("#show-favs")
 
 var getLocal = function(){
+    // var checkBooks = JSON.parse(localStorage.getItem("storedBooks")) || []
+    // if there are no items in local storage, tell the user that no books have been saved yet
+    if (localStorage.getItem("storedBooks") === null || localStorage.getItem("storedBooks").length<1) {
+        displayEl.textContent = "You have not saved any books yet. Please browse the Bestellers tab to add bookmarks."
+    }
+    else{
     var savedBooks = localStorage.getItem("storedBooks")
     savedBooks = JSON.parse(savedBooks)
     // loop through books and display on page
@@ -9,6 +15,7 @@ var getLocal = function(){
         var dispCover = savedBooks[i].savedCover
         var dispTitle = savedBooks[i].savedTitle
         var dispAuthor = savedBooks[i].savedAuthor
+        var dispLink = savedBooks[i].savedLink
 
         // create elements
         var card = document.createElement("div")
@@ -23,13 +30,18 @@ var getLocal = function(){
         var col = document.createElement("div")
         var footer = document.createElement("footer")
         var aTag = document.createElement("a")
+        var aTag2 = document.createElement("a")
 
         // set values
-        aTag.textContent = "Remove Bookmark"
+        aTag.textContent = "Remove"
+        aTag2.textContent = "Purchase"
+        aTag2.href= dispLink
+        aTag2.target = "_blank"
         img.src = dispCover
         author.textContent = dispAuthor
         title.textContent = dispTitle
         title.setAttribute("id", savedBooks[i].savedTitle)
+
 
         // create class names
         card.classList = "card"
@@ -44,9 +56,10 @@ var getLocal = function(){
         col.classList = "column is-3"
         footer.classList = "card-footer"
         aTag.classList = "card-footer-item"
+        aTag2.classList = "card-footer-item"
 
         // append elements to page
-        footer.append(aTag)
+        footer.append(aTag,aTag2)
         fig.appendChild(img)
         cardImg.appendChild(fig)
         mediaCont.append(title,author)
@@ -82,6 +95,7 @@ var getLocal = function(){
             localStorage.setItem("storedBooks", savedBooks)
         }
     }
+}
 }
 
 getLocal();
